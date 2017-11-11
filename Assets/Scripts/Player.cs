@@ -19,6 +19,14 @@ public class Player : MonoBehaviour {
 		pos.x = mouse.x;
 		mouseY = mouse.y;
 		gameObject.transform.position = pos;
+		if (env.getBallCount() == 0) {
+			updateScore(-score);
+		}
+	}
+
+	private void updateScore(int delta) {
+		score += delta;
+		scoreLabel.text = "Score: " + score;
 	}
 
 	void OnCollisionEnter2D(Collision2D colInfo) {
@@ -27,9 +35,8 @@ public class Player : MonoBehaviour {
 			ball.getRigidBody().AddForce(
 				new Vector2(0, 100 * (mouseY - gameObject.transform.position.y))
 			);
-			score += (int)(ball.getAirtime() * env.getBallCount());
+			updateScore((int)(ball.getAirtime() * env.getBallCount()));
 			ball.resetAirtime();
-			scoreLabel.text = "Score: " + score;
 		}
 	}
 
