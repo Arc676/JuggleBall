@@ -23,7 +23,10 @@ public class Ball : MonoBehaviour {
 		Vector2 v = rigidBody.velocity;
 		float x = Camera.main.WorldToScreenPoint(gameObject.transform.position).x;
 		if (x < 0 || x > Screen.width) {
-			v.x *= -1;
+			v.x = Mathf.Abs(v.x);
+			if (x > Screen.width) {
+				v.x *= -1;
+			}
 			rigidBody.velocity = v;
 		}
 	}
