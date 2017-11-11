@@ -25,6 +25,8 @@ public class Player : MonoBehaviour {
 			if (score > hiScore) {
 				hiScore = score;
 				hiscoreLabel.text = "High Score: " + hiScore;
+				PlayerPrefs.SetInt("HiScore", hiScore);
+				PlayerPrefs.Save();
 			}
 			updateScore(-score);
 		}
