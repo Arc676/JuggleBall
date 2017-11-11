@@ -11,6 +11,8 @@ public class Player : MonoBehaviour {
 	private float mouseY;
 
 	[SerializeField] private Text scoreLabel;
+	[SerializeField] private Text hiscoreLabel;
+	private int hiScore = 0;
 	public int score = 0;
 
 	void Update () {
@@ -20,6 +22,10 @@ public class Player : MonoBehaviour {
 		mouseY = mouse.y;
 		gameObject.transform.position = pos;
 		if (env.getBallCount() == 0) {
+			if (score > hiScore) {
+				hiScore = score;
+				hiscoreLabel.text = "High Score: " + hiScore;
+			}
 			updateScore(-score);
 		}
 	}
