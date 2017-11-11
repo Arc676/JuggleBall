@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class Player : MonoBehaviour {
 
 	private float mouseY;
 
+	[SerializeField] private Text scoreLabel;
 	public int score = 0;
 
 	void Update () {
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour {
 			);
 			score += (int)(ball.getAirtime() * env.getBallCount());
 			ball.resetAirtime();
+			scoreLabel.text = "Score: " + score;
 		}
 	}
 
