@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Environment : MonoBehaviour {
 
+	[SerializeField] private Player player;
+
 	[SerializeField] private GameObject ballPrefab;
 	private List<GameObject> balls = new List<GameObject>();
-
 	private float timeSinceLastSpawn = 0;
+
+	private List<PowerupInfo> powerups = new List<PowerupInfo>();
 
 	void Start() {
 		spawnBall();
@@ -15,6 +18,13 @@ public class Environment : MonoBehaviour {
 
 	public int getBallCount() {
 		return balls.Count;
+	}
+
+	public void obtainPowerup(Powerup p) {
+		p.powerup(player);
+		powerups.Add(
+			new PowerupInfo(p, p.timeLimit)
+		);
 	}
 
 	private void spawnBall() {
@@ -29,6 +39,7 @@ public class Environment : MonoBehaviour {
 				0
 			)
 		);
+		obj.GetComponent<Ball>().setEnvironment(this);
 		balls.Add(
 			obj
 		);
@@ -36,6 +47,17 @@ public class Environment : MonoBehaviour {
 
 	void Update() {
 		timeSinceLastSpawn += Time.deltaTime;
+		for (int i = 0; i < powerups.Count;) {
+			PowerupInfo pi = powerups[i];
+			pi.timeSinceObtainment += Time.deltaTime;
+			if (pi.timeSinceObtainment > pi.timeLimit) {
+				powerups.Remove(pi);
+				pi.powerup.powerdown(player);
+				Destroy(pi.powerup.gameObject);
+			} else {
+				i++;
+			}
+		}
 		if (timeSinceLastSpawn > 10) {
 			timeSinceLastSpawn = 0;
 			spawnBall();

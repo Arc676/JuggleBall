@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball : MonoBehaviour {
+
 	[SerializeField] private Rigidbody2D rigidBody;
 	private float airtime;
 
+	private Environment env;
+
 	public Rigidbody2D getRigidBody() {
 		return rigidBody;
+	}
+
+	public void setEnvironment(Environment env) {
+		this.env = env;
 	}
 
 	public void resetAirtime() {
@@ -28,6 +35,14 @@ public class Ball : MonoBehaviour {
 				v.x *= -1;
 			}
 			rigidBody.velocity = v;
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		Powerup p = other.GetComponent<Powerup>();
+		if (p) {
+			env.obtainPowerup(p);
+			other.gameObject.SetActive(false);
 		}
 	}
 
