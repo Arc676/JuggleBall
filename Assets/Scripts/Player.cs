@@ -5,8 +5,11 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	[SerializeField] private BoxCollider2D boxCol;
+	[SerializeField] private Environment env;
 
 	private float mouseY;
+
+	public int score = 0;
 
 	void Update () {
 		Vector2 pos = gameObject.transform.position;
@@ -22,6 +25,8 @@ public class Player : MonoBehaviour {
 			ball.getRigidBody().AddForce(
 				new Vector2(0, 100 * (mouseY - gameObject.transform.position.y))
 			);
+			score += (int)(ball.getAirtime() * env.getBallCount());
+			ball.resetAirtime();
 		}
 	}
 

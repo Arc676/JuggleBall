@@ -13,6 +13,10 @@ public class Environment : MonoBehaviour {
 		spawnBall();
 	}
 
+	public int getBallCount() {
+		return balls.Count;
+	}
+
 	private void spawnBall() {
 		GameObject obj = (GameObject) Instantiate(
 			ballPrefab,
