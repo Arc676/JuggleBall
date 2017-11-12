@@ -15,6 +15,12 @@ public class Player : MonoBehaviour {
 	private int hiScore = 0;
 	public int score = 0;
 
+	void Start() {
+		if (PlayerPrefs.HasKey("HiScore")) {
+			hiScore = PlayerPrefs.GetInt("HiScore");
+		}
+	}
+
 	void Update () {
 		Vector2 pos = gameObject.transform.position;
 		Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
