@@ -36,6 +36,10 @@ public class Ball : MonoBehaviour {
 			}
 			rigidBody.velocity = v;
 		}
+		if (gameObject.transform.position.y < -5) {
+			env.ballDropped();
+			Destroy(gameObject);
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {

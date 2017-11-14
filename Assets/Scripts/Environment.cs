@@ -7,17 +7,18 @@ public class Environment : MonoBehaviour {
 	[SerializeField] private Player player;
 
 	[SerializeField] private GameObject ballPrefab;
-	private List<GameObject> balls = new List<GameObject>();
+	private int ballCount = 0;
 	private float timeSinceLastSpawn = 0;
 
 	private List<PowerupInfo> powerups = new List<PowerupInfo>();
+	[SerializeField] private GameObject[] powerupPrefabs;
 
 	void Start() {
 		spawnBall();
 	}
 
 	public int getBallCount() {
-		return balls.Count;
+		return ballCount;
 	}
 
 	public void obtainPowerup(Powerup p) {
@@ -40,9 +41,11 @@ public class Environment : MonoBehaviour {
 			)
 		);
 		obj.GetComponent<Ball>().setEnvironment(this);
-		balls.Add(
-			obj
-		);
+		ballCount++;
+	}
+
+	public void ballDropped() {
+		ballCount--;
 	}
 
 	void Update() {
@@ -61,15 +64,6 @@ public class Environment : MonoBehaviour {
 		if (timeSinceLastSpawn > 10) {
 			timeSinceLastSpawn = 0;
 			spawnBall();
-		}
-		for (int i = 0; i < balls.Count;) {
-			GameObject obj=  balls[i];
-			if (obj.transform.position.y < -5) {
-				balls.Remove(obj);
-				Destroy(obj);
-			} else {
-				i++;
-			}
 		}
 	}
 
