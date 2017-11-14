@@ -9,6 +9,7 @@ public class Environment : MonoBehaviour {
 	[SerializeField] private GameObject ballPrefab;
 	private int ballCount = 0;
 	private float timeSinceLastSpawn = 0;
+	public float spawnTime = 10;
 
 	private List<PowerupInfo> powerups = new List<PowerupInfo>();
 	[SerializeField] private GameObject[] powerupPrefabs;
@@ -22,7 +23,7 @@ public class Environment : MonoBehaviour {
 	}
 
 	public void obtainPowerup(Powerup p) {
-		p.powerup(player);
+		p.powerup(player, this);
 		powerups.Add(
 			new PowerupInfo(p, p.timeLimit)
 		);
@@ -55,13 +56,13 @@ public class Environment : MonoBehaviour {
 			pi.timeSinceObtainment += Time.deltaTime;
 			if (pi.timeSinceObtainment > pi.timeLimit) {
 				powerups.Remove(pi);
-				pi.powerup.powerdown(player);
+				pi.powerup.powerdown(player, this);
 				Destroy(pi.powerup.gameObject);
 			} else {
 				i++;
 			}
 		}
-		if (timeSinceLastSpawn > 10) {
+		if (timeSinceLastSpawn > spawnTime) {
 			timeSinceLastSpawn = 0;
 			spawnBall();
 		}

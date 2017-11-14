@@ -6,7 +6,7 @@ public class Powerup : MonoBehaviour {
 
 	public float timeLimit;
 
-	public virtual void powerup(Player p) {}
-	public virtual void powerdown(Player p) {}
+	public virtual void powerup(Player p, Environment e) {}
+	public virtual void powerdown(Player p, Environment e) {}
 
 }
