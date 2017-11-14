@@ -29,7 +29,7 @@ public class Environment : MonoBehaviour {
 		);
 	}
 
-	private void spawnBall() {
+	public void spawnBall() {
 		GameObject obj = (GameObject) Instantiate(
 			ballPrefab,
 			new Vector2(0, 5),
