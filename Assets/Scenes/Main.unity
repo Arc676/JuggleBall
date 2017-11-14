@@ -648,8 +648,9 @@ MonoBehaviour:
   spawnTime: 10
   powerupPrefabs:
   - {fileID: 1293155473927746, guid: 453c8821dcda74f26a0afd1be473caad, type: 2}
-  - {fileID: 1792156748214608, guid: b33c194d218f64e77929d7b5b7e5b6da, type: 2}
   - {fileID: 1077392009209908, guid: 881567c786b5e4561a6599e227f37e9c, type: 2}
+  - {fileID: 1792156748214608, guid: b33c194d218f64e77929d7b5b7e5b6da, type: 2}
+  powerupSpawnTime: 8
 --- !u!4 &1998253467
 Transform:
   m_ObjectHideFlags: 0

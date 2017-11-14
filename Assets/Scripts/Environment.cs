@@ -13,6 +13,8 @@ public class Environment : MonoBehaviour {
 
 	private List<PowerupInfo> powerups = new List<PowerupInfo>();
 	[SerializeField] private GameObject[] powerupPrefabs;
+	private float timeSinceLastPowerupSpawn = 0;
+	public float powerupSpawnTime = 8;
 
 	void Start() {
 		spawnBall();
@@ -37,7 +39,7 @@ public class Environment : MonoBehaviour {
 		);
 		obj.GetComponent<Rigidbody2D>().AddForce(
 			new Vector2(
-				Random.Range(-100, 100),
+				Random.Range(-100.0f, 100.0f),
 				0
 			)
 		);
@@ -45,12 +47,29 @@ public class Environment : MonoBehaviour {
 		ballCount++;
 	}
 
+	private void spawnPowerup(int index) {
+		if (index < 0 || index >= powerupPrefabs.Length) {
+			return;
+		}
+		Instantiate(
+			powerupPrefabs[index],
+			new Vector2(Random.Range(-5.0f, 5.0f), Random.Range(-5.0f, 5.0f)),
+			Quaternion.identity
+		);
+	}
+
+	private void spawnRandomPowerup() {
+		spawnPowerup(
+			Random.Range(0, powerupPrefabs.Length)
+		);
+	}
+
 	public void ballDropped() {
 		ballCount--;
 	}
 
 	void Update() {
-		timeSinceLastSpawn += Time.deltaTime;
+		float dt = Time.deltaTime;
 		for (int i = 0; i < powerups.Count;) {
 			PowerupInfo pi = powerups[i];
 			pi.timeSinceObtainment += Time.deltaTime;
@@ -62,9 +81,17 @@ public class Environment : MonoBehaviour {
 				i++;
 			}
 		}
+		timeSinceLastSpawn += dt;
 		if (timeSinceLastSpawn > spawnTime) {
 			timeSinceLastSpawn = 0;
 			spawnBall();
+		}
+		timeSinceLastPowerupSpawn += dt;
+		if (timeSinceLastPowerupSpawn > powerupSpawnTime) {
+			timeSinceLastPowerupSpawn = 0;
+			if (Random.Range(0, 100) < 50) {
+				spawnRandomPowerup();
+			}
 		}
 	}
 
