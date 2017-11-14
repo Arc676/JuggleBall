@@ -15,9 +15,22 @@ public class Player : MonoBehaviour {
 	private int hiScore = 0;
 	public int score = 0;
 
+	void updateHiScore(int score) {
+		updateHiScore(score, true);
+	}
+
+	void updateHiScore(int score, bool save) {
+		hiScore = score;
+		hiscoreLabel.text = "High Score: " + hiScore;
+		if (save) {
+			PlayerPrefs.SetInt("HiScore", hiScore);
+			PlayerPrefs.Save();
+		}
+	}
+
 	void Start() {
 		if (PlayerPrefs.HasKey("HiScore")) {
-			hiScore = PlayerPrefs.GetInt("HiScore");
+			updateHiScore(PlayerPrefs.GetInt("HiScore"), false);
 		}
 	}
 
@@ -29,10 +42,7 @@ public class Player : MonoBehaviour {
 		gameObject.transform.position = pos;
 		if (env.getBallCount() == 0) {
 			if (score > hiScore) {
-				hiScore = score;
-				hiscoreLabel.text = "High Score: " + hiScore;
-				PlayerPrefs.SetInt("HiScore", hiScore);
-				PlayerPrefs.Save();
+				updateHiScore(score);
 			}
 			updateScore(-score);
 		}
