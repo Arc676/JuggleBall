@@ -34,6 +34,13 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	public void gameOver() {
+		if (score > hiScore) {
+			updateHiScore(score);
+		}
+		updateScore(-score);
+	}
+
 	void Update () {
 		Vector2 pos = gameObject.transform.position;
 		Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -41,10 +48,7 @@ public class Player : MonoBehaviour {
 		mouseY = mouse.y;
 		gameObject.transform.position = pos;
 		if (env.getBallCount() == 0) {
-			if (score > hiScore) {
-				updateHiScore(score);
-			}
-			updateScore(-score);
+			gameOver();
 		}
 	}
 

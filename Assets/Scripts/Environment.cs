@@ -10,6 +10,7 @@ public class Environment : MonoBehaviour {
 	private int ballCount = 0;
 	private float timeSinceLastSpawn = 0;
 	public float spawnTime = 10;
+	private int ballsDropped = 0;
 
 	private List<PowerupInfo> powerups = new List<PowerupInfo>();
 	[SerializeField] private GameObject[] powerupPrefabs;
@@ -65,6 +66,11 @@ public class Environment : MonoBehaviour {
 	}
 
 	public void ballDropped() {
+		ballsDropped++;
+		if (ballsDropped > 20) {
+			ballsDropped = 0;
+			player.gameOver();
+		}
 		ballCount--;
 	}
 
