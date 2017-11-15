@@ -49,6 +49,7 @@ public class Player : MonoBehaviour {
 		gameIsOver = true;
 		gameObject.transform.position = new Vector2(-10, -4.5f);
 		gameOverLabel.gameObject.SetActive(true);
+		env.clearAllPowerups();
 	}
 
 	void Update () {

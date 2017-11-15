@@ -77,6 +77,18 @@ public class Environment : MonoBehaviour {
 		ballCount--;
 	}
 
+	void powerdown(PowerupInfo pi) {
+		powerups.Remove(pi);
+		pi.powerup.powerdown(player, this);
+		Destroy(pi.powerup.gameObject);
+	}
+
+	public void clearAllPowerups() {
+		while (powerups.Count > 0) {
+			powerdown(powerups[0]);
+		}
+	}
+
 	void Update() {
 		if (player.getGameOver()) {
 			return;
@@ -86,9 +98,7 @@ public class Environment : MonoBehaviour {
 			PowerupInfo pi = powerups[i];
 			pi.timeSinceObtainment += Time.deltaTime;
 			if (pi.timeSinceObtainment > pi.timeLimit) {
-				powerups.Remove(pi);
-				pi.powerup.powerdown(player, this);
-				Destroy(pi.powerup.gameObject);
+				powerdown(pi);
 			} else {
 				i++;
 			}
