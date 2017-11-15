@@ -66,6 +66,9 @@ public class Environment : MonoBehaviour {
 	}
 
 	public void ballDropped() {
+		if (player.getGameOver()) {
+			return;
+		}
 		ballsDropped++;
 		if (ballsDropped > 20) {
 			ballsDropped = 0;
@@ -75,6 +78,9 @@ public class Environment : MonoBehaviour {
 	}
 
 	void Update() {
+		if (player.getGameOver()) {
+			return;
+		}
 		float dt = Time.deltaTime;
 		for (int i = 0; i < powerups.Count;) {
 			PowerupInfo pi = powerups[i];

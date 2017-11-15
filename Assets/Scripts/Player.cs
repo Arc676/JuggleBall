@@ -15,6 +15,9 @@ public class Player : MonoBehaviour {
 	private int hiScore = 0;
 	public int score = 0;
 
+	private bool gameIsOver = false;
+	[SerializeField] private Text gameOverLabel;
+
 	void updateHiScore(int score) {
 		updateHiScore(score, true);
 	}
@@ -34,14 +37,29 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	public bool getGameOver() {
+		return gameIsOver;
+	}
+
 	public void gameOver() {
 		if (score > hiScore) {
 			updateHiScore(score);
 		}
 		updateScore(-score);
+		gameIsOver = true;
+		gameObject.transform.position = new Vector2(-10, -4.5f);
+		gameOverLabel.gameObject.SetActive(true);
 	}
 
 	void Update () {
+		if (gameIsOver) {
+			if (Input.anyKey) {
+				gameIsOver = false;
+				env.spawnBall();
+				gameOverLabel.gameObject.SetActive(false);
+			}
+			return;
+		}
 		Vector2 pos = gameObject.transform.position;
 		Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		pos.x = mouse.x;
