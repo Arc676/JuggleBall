@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Score2xPowerup : MonoBehaviour {
+public class Score2xPowerup : Powerup {
 
-	// Use this for initialization
-	void Start () {
-		
+	override public void powerup(Player p, Environment e) {
+		p.scoreFactor *= 2;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	override public void powerdown(Player p, Environment e) {
+		p.scoreFactor /= 2;
 	}
+
 }

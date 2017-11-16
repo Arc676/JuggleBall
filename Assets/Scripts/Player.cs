@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
 	[SerializeField] private Text hiscoreLabel;
 	private int hiScore = 0;
 	public int score = 0;
+	public int scoreFactor = 1;
 
 	private bool gameIsOver = false;
 	[SerializeField] private Text gameOverLabel;
@@ -72,7 +73,7 @@ public class Player : MonoBehaviour {
 	}
 
 	private void updateScore(int delta) {
-		score += delta;
+		score += delta * (delta > 0 ? scoreFactor : 1);
 		scoreLabel.text = "Score: " + score;
 	}
 

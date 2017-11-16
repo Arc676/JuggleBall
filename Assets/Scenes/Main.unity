@@ -452,6 +452,7 @@ MonoBehaviour:
   scoreLabel: {fileID: 1480250523}
   hiscoreLabel: {fileID: 662656944}
   score: 0
+  scoreFactor: 1
   gameOverLabel: {fileID: 242118024}
 --- !u!212 &1411721600
 SpriteRenderer:
@@ -731,6 +732,7 @@ MonoBehaviour:
   - {fileID: 1293155473927746, guid: 453c8821dcda74f26a0afd1be473caad, type: 2}
   - {fileID: 1077392009209908, guid: 881567c786b5e4561a6599e227f37e9c, type: 2}
   - {fileID: 1792156748214608, guid: b33c194d218f64e77929d7b5b7e5b6da, type: 2}
+  - {fileID: 1157262422011670, guid: f6ae1127230d14e5eb303748216931ed, type: 2}
   powerupSpawnTime: 8
 --- !u!4 &1998253467
 Transform:
