@@ -11,4 +11,4 @@ Each time the ball bounces, your score increases. You get more points per bounce
 - The ball had longer airtime
 - There are more balls onscreen at the same time
 
-You don't have to get all the balls, but be careful! If you drop all the balls your score will go back to zero!
+You lose if you drop all the balls that are currently in existence, or after you drop a total of 20 balls. Click or press any key to restart.
