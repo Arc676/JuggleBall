@@ -12,3 +12,5 @@ Each time the ball bounces, your score increases. You get more points per bounce
 - There are more balls onscreen at the same time
 
 You lose if you drop all the balls that are currently in existence, or after you drop a total of 20 balls. Click or press any key to restart.
+
+Project available under GPLv3.
