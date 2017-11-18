@@ -53,12 +53,16 @@ public class Player : MonoBehaviour {
 		env.clearAllPowerups();
 	}
 
+	void newGame() {
+		gameIsOver = false;
+		gameOverLabel.gameObject.SetActive(false);
+		env.newGame ();
+	}
+
 	void Update () {
 		if (gameIsOver) {
 			if (Input.anyKey) {
-				gameIsOver = false;
-				env.spawnBall();
-				gameOverLabel.gameObject.SetActive(false);
+				newGame ();
 			}
 			return;
 		}
@@ -67,7 +71,7 @@ public class Player : MonoBehaviour {
 		pos.x = mouse.x;
 		mouseY = mouse.y;
 		gameObject.transform.position = pos;
-		if (env.getBallCount() == 0) {
+		if (env.getBallCount() <= 0) {
 			gameOver();
 		}
 	}

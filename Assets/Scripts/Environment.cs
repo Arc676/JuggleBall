@@ -21,6 +21,14 @@ public class Environment : MonoBehaviour {
 		spawnBall();
 	}
 
+	public void newGame() {
+		ballCount = 0;
+		timeSinceLastSpawn = 0;
+		ballsDropped = 0;
+		timeSinceLastPowerupSpawn = 0;
+		spawnBall ();
+	}
+
 	public int getBallCount() {
 		return ballCount;
 	}
