@@ -62,7 +62,7 @@ public class Environment : MonoBehaviour {
 		}
 		Instantiate(
 			powerupPrefabs[index],
-			new Vector2(Random.Range(-5.0f, 5.0f), Random.Range(-5.0f, 5.0f)),
+			new Vector2(Random.Range(-5.0f, 5.0f), Random.Range(-4.0f, 5.0f)),
 			Quaternion.identity
 		);
 	}
