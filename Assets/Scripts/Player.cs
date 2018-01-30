@@ -84,8 +84,9 @@ public class Player : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D colInfo) {
 		Ball ball = colInfo.gameObject.GetComponent<Ball>();
 		if (ball) {
+			float dx = ball.transform.position.x - transform.position.x;
 			ball.getRigidBody().AddForce(
-				new Vector2(0, 100 * (mouseY - gameObject.transform.position.y))
+				new Vector2(dx * 50, 100 * (mouseY - gameObject.transform.position.y))
 			);
 			updateScore((int)(ball.getAirtime() * env.getBallCount()));
 			ball.resetAirtime();
