@@ -38,6 +38,7 @@ public class Environment : MonoBehaviour {
 	}
 
 	public void newGame() {
+		clearAllPowerups ();
 		ballCount = 0;
 		timeSinceLastSpawn = 0;
 		ballsDropped = 0;
@@ -107,7 +108,7 @@ public class Environment : MonoBehaviour {
 		Destroy(pi.powerup.gameObject);
 	}
 
-	public void clearAllPowerups() {
+	void clearAllPowerups() {
 		while (powerups.Count > 0) {
 			powerdown(powerups[0]);
 		}
