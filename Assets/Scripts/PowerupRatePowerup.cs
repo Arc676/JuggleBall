@@ -21,9 +21,11 @@ using UnityEngine;
 public class PowerupRatePowerup : Powerup {
 
 	override public void powerup(Player p, Environment e) {
+		e.powerupSpawnTime /= 2;
 	}
 
 	override public void powerdown(Player p, Environment e) {
+		e.powerupSpawnTime *= 2;
 	}
 
 }
