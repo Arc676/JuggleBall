@@ -21,6 +21,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour {
 
 	[SerializeField] private Rigidbody2D rigidBody;
+	[SerializeField] private AudioSource powerupSound;
 	private float airtime;
 
 	private Environment env;
@@ -61,6 +62,7 @@ public class Ball : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		Powerup p = other.GetComponent<Powerup>();
 		if (p) {
+			powerupSound.Play();
 			env.obtainPowerup(p);
 			other.gameObject.SetActive(false);
 		}

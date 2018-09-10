@@ -23,6 +23,7 @@ public class Player : MonoBehaviour {
 
 	[SerializeField] private BoxCollider2D boxCol;
 	[SerializeField] private Environment env;
+	[SerializeField] private AudioSource bounce;
 
 	private float mouseY;
 
@@ -99,6 +100,7 @@ public class Player : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D colInfo) {
 		Ball ball = colInfo.gameObject.GetComponent<Ball>();
 		if (ball) {
+			bounce.Play();
 			float dx = ball.transform.position.x - transform.position.x;
 			ball.getRigidBody().AddForce(
 				new Vector2(dx * 50, 100 * (mouseY - gameObject.transform.position.y))
